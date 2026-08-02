@@ -25,6 +25,7 @@ import {
   Users,
   Bot,
   UserCheck,
+  Info,
 } from "lucide-react";
 
 const DEFAULT_TYPES: Record<Color, PlayerType> = {
@@ -47,6 +48,7 @@ export default function App() {
   const [rolling, setRolling] = useState(false);
   const [speed, setSpeed] = useState<GameSpeed>("rapide");
   const [musicOn, setMusicOn] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
   const [sfxOn, setSfxOn] = useState(true);
   const [activeTab, setActiveTab] = useState<"controls" | "history" | "rules">("controls");
   const timers = useRef<number[]>([]);
@@ -230,9 +232,38 @@ export default function App() {
               <Music className={`w-4 h-4 ${musicOn ? "text-indigo-400 animate-bounce" : ""}`} />
               <span className="hidden md:inline">Musique</span>
             </button>
+
+            {/* Info Toggle */}
+            <button
+              onClick={() => setShowInfo(true)}
+              className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold text-slate-400 transition shadow-lg hover:bg-white/10"
+              title="Comment ce jeu a été fait"
+            >
+              <Info className="w-4 h-4" />
+              <span className="hidden md:inline">Infos</span>
+            </button>
           </div>
         </div>
       </header>
+
+      {showInfo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4" onClick={() => setShowInfo(false)}>
+          <div className="w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-3xl border border-white/10 bg-slate-900 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="p-6 space-y-3.5 text-sm leading-relaxed text-slate-300">
+              <h3 className="text-xl font-black bg-gradient-to-r from-rose-400 via-amber-300 to-emerald-400 bg-clip-text text-transparent">Comment ce jeu a été fait</h3>
+              <p><strong className="text-white">Stack :</strong> React 19, TypeScript 5.9, Tailwind CSS 4, Vite 7, compilé en un seul fichier HTML, aucune dépendance chargée depuis l'extérieur (hors icônes vectorielles et confettis, tous deux inclus dans le bundle).</p>
+              <p><strong className="text-white">Graphismes :</strong> plateau et pions en DOM/CSS, animations de déplacement et de capture, confettis à la victoire.</p>
+              <p><strong className="text-white">Musique &amp; sons :</strong> synthétisés en direct avec l'API Web Audio, aucun fichier audio chargé.</p>
+              <p><strong className="text-white">Interactions :</strong> clic sur le dé pour lancer, clic sur un pion jouable pour le déplacer, aperçu de la case d'arrivée au survol.</p>
+              <p><strong className="text-white">Architecture :</strong> logique de jeu pilotée par un reducer (<code>game.ts</code>) séparé du rendu, historique des coups conservé pour l'onglet dédié.</p>
+              <p><strong className="text-white">Algorithmes notables :</strong> un 6 obtenu, une capture ou un pion arrivé donnent un tour supplémentaire ; trois 6 consécutifs annulent le tour en cours (règle traditionnelle). Les cases protégées (étoilées) empêchent la capture des pions qui s'y trouvent.</p>
+            </div>
+            <div className="border-t border-white/10 p-4 text-center">
+              <button onClick={() => setShowInfo(false)} className="px-6 py-2.5 rounded-xl font-black text-white bg-gradient-to-r from-rose-500 to-emerald-500 hover:brightness-110 active:scale-95 transition-all">Fermer</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Container */}
       <main className="mx-auto max-w-7xl px-4 py-8">
