@@ -176,7 +176,7 @@ export default function App() {
                 Petits Chevaux
               </h1>
               <p className="text-[11px] font-medium text-slate-400 flex items-center gap-1.5">
-                <span>Créé par <strong className="text-slate-200">Hylst</strong></span>
+                <span>Créé par Geoffroy Streit (Hylst) avec l'aide d'une IA</span>
               </p>
             </div>
           </div>
@@ -560,7 +560,7 @@ export default function App() {
                   </div>
 
                   <div className="pt-2 border-t border-white/10 text-xs text-slate-500 text-center">
-                    Créé par Hylst.
+                    Créé par Geoffroy Streit (Hylst) avec l'aide d'une IA.
                   </div>
                 </div>
               </div>

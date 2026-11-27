@@ -78,3 +78,7 @@ retente alors une nouvelle page fraîche plutôt que de rapporter un faux échec
 - [ ] Aucun blocage ("règle du carré") entre plusieurs pions d'une même couleur empilés
   sur une case : contrairement à certaines variantes régionales, ce blocage n'est pas
   implémenté ici. Design simplifié plausible, pas une incohérence interne : pas corrigé.
+
+## Audit du 27/11/2026
+
+- [ ] Ajouter des raccourcis clavier (Entrée pour le dé, 1 à 4 pour les pions) ou documenter Tab.
